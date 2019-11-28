@@ -1,4 +1,5 @@
 import React from 'react'
+import Book from './Book'
 
 class Turn extends React.Component{
     render(){
@@ -8,7 +9,7 @@ class Turn extends React.Component{
                     <img src={this.props.data.author.imageUrl} className="authorimage" alt="Author" />
                 </div>
                 <div className="col-6">
-                    {this.props.data.books.map((title) => <p>{title}</p>)}
+                    {this.props.data.books.map((title) => <Book title={title} key={title} />)}
                 </div>
             </div>
         );

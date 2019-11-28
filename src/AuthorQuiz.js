@@ -7,13 +7,12 @@ import Continue from './Continue';
 import Footer from './Footer';
 
 class AuthorQuiz extends React.Component{
-  
 
   render() {
     return(
       <div className="container-fuid">
         <Hero />
-        <Turn data={this.props.data.turnData}/>
+        <Turn data={this.props.turnData}/>
         <Continue />
         <Footer />
       </div>
