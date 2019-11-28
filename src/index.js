@@ -4,6 +4,9 @@ import './index.css';
 import AuthorQuiz from './AuthorQuiz';
 import * as serviceWorker from './serviceWorker';
 import {shuffle,sample} from 'underscore';
+import { BrowserRouter, Route, withRouter } from 'react-router-dom';
+import AddAuthorForm from './AddAuthorForm'
+
 
 const authors = [
     {
@@ -68,13 +71,37 @@ function onAnswerSelected(answer){
   render();
 }
 
-const state = {
+function resetState(){
+  return {
     turnData: getTurnData(authors),
     highlight: ''
+  };
 }
 
+let state = resetState();
+
+function App(){
+  return <AuthorQuiz {...state}
+  onAnswerSelected={onAnswerSelected} 
+  onContinue={() => {
+    state = resetState();
+    render();
+  }}/>
+}
+
+const AuthorWrapper = withRouter(({history}) => {
+  return <AddAuthorForm onAddAuthor={ (author) =>{
+    authors.push(author);
+    history.push("/");
+  }} />
+});
+
 function render() {
-  ReactDOM.render(<AuthorQuiz {...state} onAnswerSelected={onAnswerSelected} />, document.getElementById('root'));
+  ReactDOM.render(
+  <BrowserRouter>
+    <Route exact path="/" component={App} />
+    <Route path="/add" component={AuthorWrapper} />
+  </BrowserRouter>, document.getElementById('root'));
 }
 
 // If you want your app to work offline and load faster, you can change
