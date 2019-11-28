@@ -1,11 +1,22 @@
 import React from 'react';
 import './AuthorQuiz.css';
 import './bootstrap.min.css';
+import Hero from './Hero';
+import Turn from './Turn';
+import Continue from './Continue';
+import Footer from './Footer';
 
 class AuthorQuiz extends React.Component{
+  
+
   render() {
     return(
-      <div>Author Quiz</div>
+      <div className="container-fuid">
+        <Hero />
+        <Turn data={this.props.data.turnData}/>
+        <Continue />
+        <Footer />
+      </div>
     )}
 }
 
